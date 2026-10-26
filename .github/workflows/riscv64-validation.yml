@@ -1,0 +1,19 @@
+name: RISC-V validation
+
+on:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04-riscv
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.25"
+      - name: Confirm native architecture
+        run: test "$(uname -m)" = riscv64
+      - name: Build configuration package
+        run: go test ./core/cfg
+      - name: Build geesefs
+        run: CGO_ENABLED=0 go build ./...
