@@ -2,6 +2,9 @@ name: RISC-V validation
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - verify/riscv64-geesefs
 
 jobs:
   validate:
