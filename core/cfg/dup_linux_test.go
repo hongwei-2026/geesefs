@@ -65,4 +65,8 @@ func TestRedirectStandardStreamsHelper(t *testing.T) {
 	} else {
 		fmt.Fprint(os.Stderr, stream)
 	}
+	if err := file.Sync(); err != nil {
+		t.Fatal(err)
+	}
+	os.Exit(0)
 }
